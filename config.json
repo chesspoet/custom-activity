@@ -1,7 +1,7 @@
 {
   "workflowApiVersion": "1.1",
   "metaData": {
-    "icon": "images/sms.png",
+    "icon": "images/icon.png",
     "category": "message"
   },
   "type": "REST",
@@ -31,16 +31,16 @@
   },
   "configurationArguments": {
     "save": {
-      "url": "URI/for/your/activity/save"
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/save"
     },
     "publish": {
-      "url": "URI/for/your/activity/publish"
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/publish"
     },
     "validate": {
-      "url": "URI/for/your/activity/validate"
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/validate"
     },
     "stop": {
-      "url": "URI/for/your/activity/stop"
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/stop"
     }
   },
   "wizardSteps": [
