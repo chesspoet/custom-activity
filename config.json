@@ -1,90 +1,60 @@
 {
-  "workflowApiVersion": "1.1",
-  "metaData": {
-    "icon": "images/icon.png",
-    "category": "message"
-  },
-  "type": "REST",
-  "lang": {
-    "en-US": {
-      "name": "REST Activity (Workflow API v1.1)",
-      "description": "An example REST activity using workflow API v1.1 format."
-    }
-  },
-  "arguments": {
-    "execute": {
-      "inArguments": [
-        {
-          "emailAddress": "{{InteractionDefaults.Email}}"
-        },
-        {
-          "phoneNumber": "{{Contact.Default.PhoneNumber}}"
-        }
-      ],
-      "outArguments": [
-        {
-          "foundSignupDate": ""
-        }
-      ],
-      "url": "https://some-endpoint.com/execute"
-    }
-  },
-  "configurationArguments": {
-    "save": {
-      "url": "https://apitestatom-0c75084e7641.herokuapp.com/save"
-    },
-    "publish": {
-      "url": "https://apitestatom-0c75084e7641.herokuapp.com/publish"
-    },
-    "validate": {
-      "url": "https://apitestatom-0c75084e7641.herokuapp.com/validate"
-    },
-    "stop": {
-      "url": "https://apitestatom-0c75084e7641.herokuapp.com/stop"
-    }
-  },
-  "wizardSteps": [
-    { "label": "Step 1", "key": "step1" },
-    { "label": "Step 2", "key": "step2" },
-    { "label": "Step 3", "key": "step3" },
-    { "label": "Step 4", "key": "step4", "active": false }
-  ],
-  "userInterfaces": {
-    "configModal": {
-      "height": 200,
-      "width": 300,
-      "fullscreen": true
-    }
-  },
-  "schema": {
-    "arguments": {
-      "execute": {
-        "inArguments": [
-          {
-            "phoneNumber": {
-              "dataType": "Phone",
-              "isNullable": false,
-              "direction": "in"
-            }
-          },
-          {
-            "emailAddress": {
-              "dataType": "Email",
-              "isNullable": false,
-              "direction": "in"
-            }
-          }
-        ],
-        "outArguments": [
-          {
-            "foundSignupDate": {
-              "dataType": "Date",
-              "direction": "out",
-              "access": "visible"
-            }
-          }
-        ]
-      }
-    }
-  }
+	"workflowApiVersion": "1.1",
+	"metaData": {
+		"icon": "chevron.png",
+		"category": "message"
+	},
+	"type": "REST",
+	"userInterfaces": {
+		"configInspector": {
+			"size": "medium"
+		}
+	},
+	"arguments": {
+		"execute": {
+			"inArguments": [
+				{
+					"ContactKey": "{{Contact.Key}}"
+				},
+				{
+					"InteractionEmail": "{{InteractionDefaults.Email}}"
+				},
+				{
+					"ContactMobilePhone": "{{Contact.Attribute.Contacts.Contact_Salesforce_1.MobilePhone}}"
+				}
+			],
+			"outArguments": [],
+			"url": "https://***86ap0aj5f.m.pipedream.net/jb-activity/execute/"
+		}
+	},
+	"configurationArguments": {
+		"save": {
+			"url": "https://***86ap0aj5f.m.pipedream.net/jb-activity/save"
+		},
+		"publish": {
+			"url": "https://***86ap0aj5f.m.pipedream.net/jb-activity/publish"
+		},
+		"validate": {
+			"url": "https://***86ap0aj5f.m.pipedream.net/jb-activity/validate"
+		},
+		"stop": {
+			"url": "https://***86ap0aj5f.m.pipedream.net/jb-activity/stop"
+		}
+	},
+	"schema": {
+		"arguments": {
+			"execute": {
+				"inArguments": [],
+				"outArguments": [
+					{
+						"messageId": {
+							"dataType": "Text",
+							"direction": "out",
+							"access": "visible"
+						}
+					}
+				]
+			}
+		}
+	}
 }
