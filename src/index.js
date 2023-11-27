@@ -1,212 +1,202 @@
-// JOURNEY BUILDER CUSTOM ACTIVITY - discountCode ACTIVITY
-// ````````````````````````````````````````````````````````````
-// This example demonstrates a custom activity that utilizes an external service to generate
-// a discount code where the user inputs the discount percent in the configuration.
-//
-// Journey Builder's Postmonger Events Reference can be found here:
-// https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-app-development.meta/mc-app-development/using-postmonger.htm
-
-
-// Custom activities load inside an iframe. We'll use postmonger to manage
-// the cross-document messaging between Journey Builder and the activity
-import Postmonger from 'postmonger';
-
-
-// Create a new connection for this session.
-// We use this connection to talk to Journey Builder. You'll want to keep this
-// reference handy and pass it into your UI framework if you're using React, Angular, Vue, etc.
-const connection = new Postmonger.Session();
-
-
-// we'll store the activity on this variable when we receive it
-let activity = null;
-
-
-// Wait for the document to load before we doing anything
-document.addEventListener('DOMContentLoaded', function main() {
-
-    // Setup a test harness so we can interact with our custom activity
-    // outside of journey builder using window functions & browser devtools.
-    // This isn't required by your activity, its for example purposes only
-    setupExampleTestHarness();
-
-    // setup our ui event handlers
-    setupEventHandlers();
-
-    // Bind the initActivity event...
-    // Journey Builder will respond with "initActivity" after it receives the "ready" signal
-    connection.on('initActivity', onInitActivity);
-
-
-    // We're all set! let's signal Journey Builder
-    // that we're ready to receive the activity payload...
-
-    // Tell the parent iFrame that we are ready.
-    connection.trigger('ready');
-});
-
-// this function is triggered by Journey Builder via Postmonger.
-// Journey Builder will send us a copy of the activity here
-function onInitActivity(payload) {
-
-    // set the activity object from this payload. We'll refer to this object as we
-    // modify it before saving.
-    activity = payload;
-
-    const hasInArguments = Boolean(
-        activity.arguments &&
-        activity.arguments.execute &&
-        activity.arguments.execute.inArguments &&
-        activity.arguments.execute.inArguments.length > 0
-    );
-
-    const inArguments = hasInArguments ? activity.arguments.execute.inArguments : [];
-
-    console.log('-------- triggered:onInitActivity({obj}) --------');
-    console.log('activity:\n ', JSON.stringify(activity, null, 4));
-    console.log('Has In Arguments: ', hasInArguments);
-    console.log('inArguments', inArguments);
-    console.log('-------------------------------------------------');
-
-    // check if this activity has an incoming argument.
-    // this would be set on the server side when the activity executes
-    // (take a look at execute() in ./discountCode/app.js to see where that happens)
-    const discountArgument = inArguments.find((arg) => arg.discount);
-
-    console.log('Discount Argument', discountArgument);
-
-    // if a discountCode back argument was set, show the message in the view.
-    if (discountArgument) {
-        selectDiscountCodeOption(discountArgument.discount);
-    }
-
-    // if the discountCode back argument doesn't exist the user can pick
-    // a discountCode message from the drop down list. the discountCode back arg
-    // will be set once the journey executes the activity
-}
-
-function onDoneButtonClick() {
-    // we set must metaData.isConfigured in order to tell JB that
-    // this activity is ready for activation
-    activity.metaData.isConfigured = true;
-
-    // get the option that the user selected and save it to
-    const select = document.getElementById('discount-code');
-    const option = select.options[select.selectedIndex];
-
-    activity.arguments.execute.inArguments = [{
-        discount: option.value,
-    }];
-
-    // you can set the name that appears below the activity with the name property
-    activity.name = `Issue ${activity.arguments.execute.inArguments[0].discount}% Code`;
-
-    console.log('------------ triggering:updateActivity({obj}) ----------------');
-    console.log('Sending message back to updateActivity');
-    console.log('saving\n', JSON.stringify(activity, null, 4));
-    console.log('--------------------------------------------------------------');
-
-    connection.trigger('updateActivity', activity);
-}
-
-function onCancelButtonClick() {
-    // tell Journey Builder that this activity has no changes.
-    // we wont be prompted to save changes when the inspector closes
-    connection.trigger('setActivityDirtyState', false);
-
-    // now request that Journey Builder closes the inspector/drawer
-    connection.trigger('requestInspectorClose');
-}
-
-function onDiscountCodeSelectChange() {
-    // enable or disable the done button when the select option changes
-    const select = document.getElementById('discount-code');
-
-    if (select.selectedIndex) {
-        document.getElementById('done').removeAttribute('disabled');
-    } else {
-        document.getElementById('done').setAttribute('disabled', '');
-    }
-
-    // let journey builder know the activity has changes
-    connection.trigger('setActivityDirtyState', true);
-}
-
-function selectDiscountCodeOption(value) {
-    const select = document.getElementById('discount-code');
-    const selectOption = select.querySelector(`[value='${value}']`);
-
-    if (selectOption) {
-        selectOption.selected = true;
-        onDiscountCodeSelectChange();
-    } else {
-        console.log('Could not select value from list', `[value='${value}]'`);
-    }
-}
-
-function setupEventHandlers() {
-    // Listen to events on the form
-    document.getElementById('done').addEventListener('click', onDoneButtonClick);
-    document.getElementById('cancel').addEventListener('click', onCancelButtonClick);
-    document.getElementById('discount-code').addEventListener('change', onDiscountCodeSelectChange);
-}
-
-// this function is for example purposes only. it sets ups a Postmonger
-// session that emulates how Journey Builder works. You can call jb.ready()
-// from the console to kick off the initActivity event with a mock activity object
-function setupExampleTestHarness() {
-
-    const isLocalhost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-    if (!isLocalhost) {
-        // don't load the test harness functions when running in Journey Builder
-        return;
-    }
-
-    const jbSession = new Postmonger.Session();
-    const jb = {};
-    window.jb = jb;
-
-    jbSession.on('setActivityDirtyState', function(value) {
-        console.log('[echo] setActivityDirtyState -> ', value);
-    });
-
-    jbSession.on('requestInspectorClose', function() {
-        console.log('[echo] requestInspectorClose');
-    });
-
-    jbSession.on('updateActivity', function(activity) {
-        console.log('[echo] updateActivity -> ', JSON.stringify(activity, null, 4));
-    });
-
-    jbSession.on('ready', function() {
-        console.log('[echo] ready');
-        console.log('\tuse jb.ready() from the console to initialize your activity')
-    });
-
-    // fire the ready signal with an example activity
-    jb.ready = function() {
-        jbSession.trigger('initActivity', {
-            name: '',
-            key: 'EXAMPLE-1',
-            metaData: {},
-            configurationArguments: {},
-            arguments: {
-                executionMode: "{{Context.ExecutionMode}}",
-                definitionId: "{{Context.DefinitionId}}",
-                activityId: "{{Activity.Id}}",
-                contactKey: "{{Context.ContactKey}}",
-                execute: {
-                    inArguments: [
-                        {
-                            discount: 10
-                        }
-                    ],
-                    outArguments: []
-                },
-                startActivityKey: "{{Context.StartActivityKey}}",
-                definitionInstanceId: "{{Context.DefinitionInstanceId}}",
-                requestObjectId: "{{Context.RequestObjectId}}"
-            }
+define(["postmonger"], function (Postmonger) {
+    "use strict";
+  
+    var connection = new Postmonger.Session();
+    var payload = {};
+    var lastStepEnabled = false;
+    var steps = [
+      // initialize to the same value as what's set in config.json for consistency
+      { label: "Step 1", key: "step1" },
+      { label: "Step 2", key: "step2" },
+      { label: "Step 3", key: "step3" },
+      { label: "Step 4", key: "step4", active: false },
+    ];
+    var currentStep = steps[0].key;
+  
+    $(window).ready(onRender);
+  
+    connection.on("initActivity", initialize);
+    connection.on("requestedTokens", onGetTokens);
+    connection.on("requestedEndpoints", onGetEndpoints);
+  
+    connection.on("clickedNext", onClickedNext);
+    connection.on("clickedBack", onClickedBack);
+    connection.on("gotoStep", onGotoStep);
+  
+    function onRender() {
+      // JB will respond the first time 'ready' is called with 'initActivity'
+      connection.trigger("ready");
+  
+      connection.trigger("requestTokens");
+      connection.trigger("requestEndpoints");
+  
+      // Disable the next button if a value isn't selected
+      $("#select1").change(function () {
+        var message = getMessage();
+        connection.trigger("updateButton", {
+          button: "next",
+          enabled: Boolean(message),
         });
-    };
-}
+  
+        $("#message").html(message);
+      });
+  
+      // Toggle step 4 active/inactive
+      // If inactive, wizard hides it and skips over it during navigation
+      $("#toggleLastStep").click(function () {
+        lastStepEnabled = !lastStepEnabled; // toggle status
+        steps[3].active = !steps[3].active; // toggle active
+  
+        connection.trigger("updateSteps", steps);
+      });
+    }
+  
+    function initialize(data) {
+      if (data) {
+        payload = data;
+      }
+  
+      var message;
+      var hasInArguments = Boolean(
+        payload["arguments"] &&
+          payload["arguments"].execute &&
+          payload["arguments"].execute.inArguments &&
+          payload["arguments"].execute.inArguments.length > 0
+      );
+  
+      var inArguments = hasInArguments
+        ? payload["arguments"].execute.inArguments
+        : {};
+  
+      $.each(inArguments, function (index, inArgument) {
+        $.each(inArgument, function (key, val) {
+          if (key === "message") {
+            message = val;
+          }
+        });
+      });
+  
+      // If there is no message selected, disable the next button
+      if (!message) {
+        showStep(null, 1);
+        connection.trigger("updateButton", { button: "next", enabled: false });
+        // If there is a message, skip to the summary step
+      } else {
+        $("#select1")
+          .find("option[value=" + message + "]")
+          .attr("selected", "selected");
+        $("#message").html(message);
+        showStep(null, 3);
+      }
+    }
+  
+    function onGetTokens(tokens) {
+      // Response: tokens = { token: <legacy token>, fuel2token: <fuel api token> }
+      // console.log(tokens);
+    }
+  
+    function onGetEndpoints(endpoints) {
+      // Response: endpoints = { restHost: <url> } i.e. "rest.s1.qa1.exacttarget.com"
+      // console.log(endpoints);
+    }
+  
+    function onClickedNext() {
+      if (
+        (currentStep.key === "step3" && steps[3].active === false) ||
+        currentStep.key === "step4"
+      ) {
+        save();
+      } else {
+        connection.trigger("nextStep");
+      }
+    }
+  
+    function onClickedBack() {
+      connection.trigger("prevStep");
+    }
+  
+    function onGotoStep(step) {
+      showStep(step);
+      connection.trigger("ready");
+    }
+  
+    function showStep(step, stepIndex) {
+      if (stepIndex && !step) {
+        step = steps[stepIndex - 1];
+      }
+  
+      currentStep = step;
+  
+      $(".step").hide();
+  
+      switch (currentStep.key) {
+        case "step1":
+          $("#step1").show();
+          connection.trigger("updateButton", {
+            button: "next",
+            enabled: Boolean(getMessage()),
+          });
+          connection.trigger("updateButton", {
+            button: "back",
+            visible: false,
+          });
+          break;
+        case "step2":
+          $("#step2").show();
+          connection.trigger("updateButton", {
+            button: "back",
+            visible: true,
+          });
+          connection.trigger("updateButton", {
+            button: "next",
+            text: "next",
+            visible: true,
+          });
+          break;
+        case "step3":
+          $("#step3").show();
+          connection.trigger("updateButton", {
+            button: "back",
+            visible: true,
+          });
+          if (lastStepEnabled) {
+            connection.trigger("updateButton", {
+              button: "next",
+              text: "next",
+              visible: true,
+            });
+          } else {
+            connection.trigger("updateButton", {
+              button: "next",
+              text: "done",
+              visible: true,
+            });
+          }
+          break;
+        case "step4":
+          $("#step4").show();
+          break;
+      }
+    }
+  
+    function save() {
+      var name = $("#select1").find("option:selected").html();
+      var value = getMessage();
+  
+      // 'payload' is initialized on 'initActivity' above.
+      // Journey Builder sends an initial payload with defaults
+      // set by this activity's config.json file.  Any property
+      // may be overridden as desired.
+      payload.name = name;
+  
+      payload["arguments"].execute.inArguments = [{ message: value }];
+  
+      payload["metaData"].isConfigured = true;
+  
+      connection.trigger("updateActivity", payload);
+    }
+  
+    function getMessage() {
+      return $("#select1").find("option:selected").attr("value").trim();
+    }
+  });
