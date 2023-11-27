@@ -21,7 +21,7 @@
         }
       ],
       "outArguments": [],
-      "url": "https://YOUR_REQUESTBIN_URL/jb-activity/execute/"
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/jb-activity/execute/"
     },
     "testExecute": "",
     "startActivityKey": "{{Context.StartActivityKey}}",
@@ -30,22 +30,22 @@
   },
   "configurationArguments": {
     "save": {
-      "url": "https://YOUR_REQUESTBIN_URL/jb-activity/save"
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/jb-activity/save"
     },
     "testSave": "",
     "publish": {
-      "url": "https://YOUR_REQUESTBIN_URL/jb-activity/publish"
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/jb-activity/publish"
     },
     "testPublish": "",
     "unpublish": "",
     "stop": {
-      "url": "https://YOUR_REQUESTBIN_URL/jb-activity/stop"
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/jb-activity/stop"
     },
     "testStop": "",
     "testUnpublish": "",
     "partnerActivityId": "",
     "validate": {
-      "url": "https://YOUR_REQUESTBIN_URL/jb-activity/validate"
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/jb-activity/validate"
     },
     "testValidate": "",
     "outArgumentSchema": {

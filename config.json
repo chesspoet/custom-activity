@@ -24,21 +24,21 @@
 				}
 			],
 			"outArguments": [],
-			"url": "https://***86ap0aj5f.m.pipedream.net/jb-activity/execute/"
+			"url": "https://apitestatom-0c75084e7641.herokuapp.com/jb-activity/execute/"
 		}
 	},
 	"configurationArguments": {
 		"save": {
-			"url": "https://***86ap0aj5f.m.pipedream.net/jb-activity/save"
+			"url": "https://apitestatom-0c75084e7641.herokuapp.com/jb-activity/save"
 		},
 		"publish": {
-			"url": "https://***86ap0aj5f.m.pipedream.net/jb-activity/publish"
+			"url": "https://apitestatom-0c75084e7641.herokuapp.com/jb-activity/publish"
 		},
 		"validate": {
-			"url": "https://***86ap0aj5f.m.pipedream.net/jb-activity/validate"
+			"url": "https://apitestatom-0c75084e7641.herokuapp.com/jb-activity/validate"
 		},
 		"stop": {
-			"url": "https://***86ap0aj5f.m.pipedream.net/jb-activity/stop"
+			"url": "https://apitestatom-0c75084e7641.herokuapp.com/jb-activity/stop"
 		}
 	},
 	"schema": {
