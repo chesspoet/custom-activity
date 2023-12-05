@@ -1,4 +1,5 @@
 {
+    "key": "4f75ab38-936f-48bf-b311-17d7910b0edf",
     "workflowApiVersion": "1.1",
     "metaData": {
         "icon": "images/icon.png",
@@ -27,7 +28,7 @@
         }
     },
     "configurationArguments": {
-        "applicationExtensionKey": "09b65ad0-f604-4304-b745-dae38fb89210",
+        "applicationExtensionKey": "4f75ab38-936f-48bf-b311-17d7910b0edf",
       "save": {
         "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/save",
           "verb": "POST",
