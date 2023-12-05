@@ -1,99 +1,68 @@
 {
     "workflowApiVersion": "1.1",
     "metaData": {
-       "icon": "images/iconSmall.png",
-       "category": "message"
+        "icon": "images/icon.png",
+        "iconSmall": "images/iconSmall.png",
+        "category": "message"
     },
     "type": "REST",
     "lang": {
-       "en-US": {
-           "name": "Twilio SMS",
-           "description": "Send Twilio SMS with Journey Builder",
-           "TwilioMessage":"test"
-       }
+        "en-US": {
+            "name": "Template",
+          "description": "A Template for a custom Journey Builder activity",
+          "step1Label": "Configure Activity"
+        }
     },
     "arguments": {
         "execute": {
-            "inArguments": [
-                {
-                  "email": "{{Contact.Default.EmailAddress}}",
-                  "phone": "{{Contact.Attribute.data_for_user_whats.phoneNumber}}" 
-                }               
-            ],
-            "outArguments": [],
-            "url": " https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/execute",
-            "verb": "POST",
+           "inArguments":[],
+          "outArguments": [],
+          "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/execute",
+           "verb": "POST",
             "body": "",
+            "header": "",
             "format": "json",
-            "useJwt": false,
-            "timeout": 2000
+            "useJwt": true,
+            "timeout": 10000
         }
     },
     "configurationArguments": {
-      "applicationExtensionKey": "09b65ad0-f604-4304-b745-dae38fb89210",
-       "save": {
-           "url": " https://apitestatom-0c75084e7641.herokuapp.com/save",
-            "verb": "POST",
-            "body": "",
-            "format": "json",
-            "useJwt": false,
-            "timeout": 2000
+        "applicationExtensionKey": "09b65ad0-f604-4304-b745-dae38fb89210",
+      "save": {
+        "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/save",
+          "verb": "POST",
+        "useJwt": true
        },
        "publish": {
-           "url": " https://apitestatom-0c75084e7641.herokuapp.com/publish",
-            "verb": "POST",
-            "body": "",
-            "format": "json",
-            "useJwt": false,
-            "timeout": 2000
+        "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/publish",
+           "verb": "POST",
+        "useJwt": true
        },
-       "validate": {
-           "url": " https://apitestatom-0c75084e7641.herokuapp.com/validate",
-            "verb": "POST",
-            "body": "",
-            "format": "json",
-            "useJwt": false,
-            "timeout": 2000
-       },
-       "stop": {
-           "url": " https://apitestatom-0c75084e7641.herokuapp.com/stop",
-            "verb": "POST",
-            "body": "",
-            "format": "json",
-            "useJwt": false,
-            "timeout": 2000
-       }
+      "stop": {
+        "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/stop",
+           "verb": "POST",
+        "useJwt": true
+      },
+      "validate": {
+        "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/validate",
+        "verb": "POST",
+        "useJwt": true
+      }
     },
     "wizardSteps": [
-       { "label": "Create SMS Message", "key": "step1" }
+        { "label": "Configure Activity", "key": "step1" }
     ],
     "userInterfaces": {
-       "configModal": {
-           "height": 600,
-           "width": 800,
-           "fullscreen": false
-       }
+        "configModal": {
+            "height": 400,
+            "width": 1000,
+          "fullscreen": false
+        }
     },
     "schema": {
         "arguments": {
             "execute": {
-                "inArguments": [
-                                  
-                    {
-                        "phone": {
-                            "dataType": "Phone",
-                            "isNullable": false,
-                            "direction": "out"   
-                        }
-                    },            
-                    {
-                        "email": {
-                            "dataType": "Email",
-                            "isNullable": true,
-                            "direction": "out"
-                        }
-                    }
-                ],
+                "inArguments": [],
                 "outArguments": []
             }
         }
