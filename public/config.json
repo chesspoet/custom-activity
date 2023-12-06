@@ -16,7 +16,14 @@
     },
     "arguments": {
         "execute": {
-           "inArguments":[],
+           "inArguments":[
+            {
+              "emailAddress": "{{InteractionDefaults.Email}}"
+            },
+            {
+              "phoneNumber": "{{Contact.Default.PhoneNumber}}"
+            }
+           ],
           "outArguments": [],
           "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/execute",
            "verb": "POST",
