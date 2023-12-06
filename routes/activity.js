@@ -80,6 +80,7 @@ exports.execute = function (req, res) {
         if (err) {
             console.error(err);
             console.error(process.env.jwtSecret);
+            console.error(req.body)
             return res.status(401).end();
         }
 
