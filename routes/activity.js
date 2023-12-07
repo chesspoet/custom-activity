@@ -88,35 +88,38 @@ exports.execute = function (req, res) {
             
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
-            var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Authorization", "Bearer 5b12b8d9-20b1-1b49-762d-5ca346e02445");
-
-var raw = JSON.stringify({
-  "templateId": "X1Mva7L7EVd06JeaeF8A",
-  "phoneNumber": "522811071722",
-  "clientName": "Isabel De Gante",
-  "groupName": "Purdy Citas",
-  "assign": false,
-  "params": {
-    "Unidad": "010203",
-    "Vehiculo": "BB61 - COASTER HIGH LINE 4.0L TM 28 PAX T.ALTO",
-    "client_name": "David Espinoza Espinoza"
-  }
-});
-
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
-
-fetch("https://us-central1-atomchat-io.cloudfunctions.net/templates", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+            const axios = require('axios');
+            let data = JSON.stringify({
+              "templateId": "X1Mva7L7EVd06JeaeF8A",
+              "phoneNumber": "522811071722",
+              "clientName": "Isabel De Gante",
+              "groupName": "Purdy Citas",
+              "assign": false,
+              "params": {
+                "Unidad": "010203",
+                "Vehiculo": "BB61 - COASTER HIGH LINE 4.0L TM 28 PAX T.ALTO",
+                "client_name": "David Espinoza Espinoza"
+              }
+            });
             
+            let config = {
+              method: 'post',
+              maxBodyLength: Infinity,
+              url: 'https://us-central1-atomchat-io.cloudfunctions.net/templates',
+              headers: { 
+                'Content-Type': 'application/json', 
+                'Authorization': 'Bearer 5b12b8d9-20b1-1b49-762d-5ca346e02445'
+              },
+              data : data
+            };
+            
+            axios.request(config)
+            .then((response) => {
+              console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+              console.log(error);
+            });
             logData(req);
             res.send(200, 'Execute');
         } else {
