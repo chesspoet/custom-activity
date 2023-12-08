@@ -92,7 +92,7 @@ define([
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
-            "segundaVar": "Hola mundo cruel"
+            "emailAddress": "oswrher@gmail.com"
         }];
         
         payload['metaData'].isConfigured = true;

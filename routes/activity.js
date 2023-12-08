@@ -102,7 +102,6 @@ exports.execute = function (req, res) {
                 "client_name": "David Espinoza Espinoza"
               }
             });
-            console.log(requestBody);
             let config = {
               method: 'post',
               maxBodyLength: Infinity,
