@@ -21,7 +21,7 @@
               "emailAddress": "{{InteractionDefaults.Email}}"
             },
             {
-              "phoneNumber": "{{Contact.Default.PhoneNumber}}"
+              "phoneNumber": "{{Contact.Attribute.data_for_user_whats.phoneNumber}}"
             }
            ],
           "outArguments": [],
