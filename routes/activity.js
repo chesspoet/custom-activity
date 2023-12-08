@@ -88,10 +88,11 @@ exports.execute = function (req, res) {
             
             // decoded in arguments
             var decodedArgs = decoded.inArguments[0];
+            console.log(decodedArgs);
             const axios = require('axios');
             let data = JSON.stringify({
               "templateId": "X1Mva7L7EVd06JeaeF8A",
-              "phoneNumber": "522299086917",
+              "phoneNumber": "522811071722",
               "clientName": "Isabel De Gante",
               "groupName": "Purdy Citas",
               "assign": false,
@@ -101,7 +102,6 @@ exports.execute = function (req, res) {
                 "client_name": "David Espinoza Espinoza"
               }
             });
-            var requestBody = req.body.inArguments[0];
             console.log(requestBody);
             let config = {
               method: 'post',
