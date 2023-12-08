@@ -92,7 +92,8 @@ define([
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
-            "emailAddress": "oswrher@gmail.com"
+            "phoneNumber": "{{Contact.Attribute.data_for_user_whats.phoneNumber}}",
+            "emailAddress": "{{InteractionDefaults.Email}}"
         }];
         
         payload['metaData'].isConfigured = true;
