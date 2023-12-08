@@ -92,13 +92,13 @@ define([
     }
 
     function save() {
-        var postcardURLValue = $('#postcard-url').val();
-        var postcardTextValue = $('#postcard-text').val();
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
             "phoneNumber": "{{Contact.Attribute.Userforcustom.phoneNumber}}",
-            "emailAddress": "{{InteractionDefaults.Email}}"
+            "emailAddress": "{{InteractionDefaults.Email}}",
+            "clientName": "{{InteractionDefaults.clientName}}",
+            "templateId": "{{InteractionDefaults.templateId}}"
         }];
         
         payload['metaData'].isConfigured = true;

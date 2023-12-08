@@ -91,15 +91,13 @@ exports.execute = function (req, res) {
             console.log(decodedArgs);
             const axios = require('axios');
             let data = JSON.stringify({
-              "templateId": "X1Mva7L7EVd06JeaeF8A",
-              "phoneNumber": "522811071722",
-              "clientName": "Isabel De Gante",
+              "templateId": decodedArgs.templateId,
+              "phoneNumber": decodedArgs.phoneNumber,
+              "clientName": decodedArgs.clientName,
               "groupName": "Purdy Citas",
               "assign": false,
               "params": {
-                "Unidad": "010203",
-                "Vehiculo": "BB61 - COASTER HIGH LINE 4.0L TM 28 PAX T.ALTO",
-                "client_name": "David Espinoza Espinoza"
+                "client_name": decodedArgs.clientName
               }
             });
             let config = {

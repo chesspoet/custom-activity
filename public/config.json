@@ -9,8 +9,8 @@
     "type": "REST",
     "lang": {
         "en-US": {
-            "name": "Template",
-          "description": "A Template for a custom Journey Builder activity",
+            "name": "Atom Whats",
+          "description": "A Template para enviar whats",
           "step1Label": "Configure Activity"
         }
     },
@@ -21,7 +21,14 @@
               "emailAddress": "{{InteractionDefaults.Email}}"
             },
             {
-              "phoneNumber": "{{Contact.Attribute.Userforcustom.phoneNumber}}"
+              "phoneNumber": "{{InteractionDefaults.phoneNumber}}"
+            }
+            ,
+            {
+              "clientName": "{{InteractionDefaults.clientName}}"
+            },
+            {
+              "templateId": "{{InteractionDefaults.templateId}}"
             }
            ],
           "outArguments": [],
@@ -81,6 +88,20 @@
                   {
                     "emailAddress": {
                       "dataType": "Email",
+                      "isNullable": false,
+                      "direction": "in"
+                    }
+                  },
+                  {
+                    "clientName": {
+                      "dataType": "Text",
+                      "isNullable": false,
+                      "direction": "in"
+                    }
+                  },
+                  {
+                    "templateId": {
+                      "dataType": "Text",
                       "isNullable": false,
                       "direction": "in"
                     }
