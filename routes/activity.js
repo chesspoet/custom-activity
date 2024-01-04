@@ -99,7 +99,7 @@ exports.execute = function (req, res) {
               "params": {
                 "Unidad": "010203",
                 "Vehiculo": "BB61 - COASTER HIGH LINE 4.0L TM 28 PAX T.ALTO",
-                "client_name":"David Espinoza Espinoza"
+                "client_name": decodedArgs.clientName
               }
             });
             let config = {
