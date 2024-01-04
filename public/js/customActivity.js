@@ -95,10 +95,10 @@ define([
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
-            "phoneNumber": "{{Contact.Attribute.Userforcustom.phoneNumber}}",
+            "phoneNumber": "{{Contact.Attribute.OPORTUNIDAD.PersonMobilePhone}}",
             "emailAddress": "{{InteractionDefaults.Email}}",
-            "clientName": "{{InteractionDefaults.clientName}}",
-            "templateId": "{{InteractionDefaults.templateId}}"
+            "clientName": "{{Contact.Attribute.OPORTUNIDAD.Nombre}}",
+            "templateId": "X1Mva7L7EVd06JeaeF8A"
         }];
         
         payload['metaData'].isConfigured = true;

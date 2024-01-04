@@ -21,14 +21,14 @@
               "emailAddress": "{{InteractionDefaults.Email}}"
             },
             {
-              "phoneNumber": "{{InteractionDefaults.phoneNumber}}"
+              "phoneNumber": "{{Contact.Attribute.OPORTUNIDAD.PersonMobilePhone}}"
             }
             ,
             {
-              "clientName": "{{InteractionDefaults.clientName}}"
+              "clientName": "{{Contact.Attribute.OPORTUNIDAD.Nombre}}"
             },
             {
-              "templateId": "{{InteractionDefaults.templateId}}"
+              "templateId": "X1Mva7L7EVd06JeaeF8A"
             }
            ],
           "outArguments": [],
