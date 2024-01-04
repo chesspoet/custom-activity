@@ -21,11 +21,11 @@
               "emailAddress": "{{InteractionDefaults.Email}}"
             },
             {
-              "phoneNumber": "{{Contact.Attribute.OPORTUNIDAD.PersonMobilePhone}}"
+              "phoneNumber": "{{Contact.Attribute.data_for_user_whats.phoneNumber}}"
             }
             ,
             {
-              "clientName": "{{Contact.Attribute.OPORTUNIDAD.Nombre}}"
+              "clientName": "{{Contact.Attribute.data_for_user_whats.clientName}}"
             },
             {
               "templateId": "X1Mva7L7EVd06JeaeF8A"
