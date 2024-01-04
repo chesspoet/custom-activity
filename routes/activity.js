@@ -97,8 +97,6 @@ exports.execute = function (req, res) {
               "groupName": "Purdy Citas",
               "assign": false,
               "params": {
-                "Unidad": "010203",
-                "Vehiculo": "BB61 - COASTER HIGH LINE 4.0L TM 28 PAX T.ALTO",
                 "client_name": decodedArgs.clientName
               }
             });

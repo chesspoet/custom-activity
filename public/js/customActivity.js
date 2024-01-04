@@ -93,12 +93,14 @@ define([
 
     function save() {
 
+        var templateId = $('#plantilla_what').val();
+
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
             "phoneNumber": "{{Contact.Attribute.DATA_PRUEBA_NUEVOS_USER.Telefono_celular}}",
             "emailAddress": "{{InteractionDefaults.email}}",
             "clientName": "{{Contact.Attribute.DATA_PRUEBA_NUEVOS_USER.Nombre_completo}}",
-            "templateId": "X1Mva7L7EVd06JeaeF8A"
+            "templateId": templateId
         }];
         
         payload['metaData'].isConfigured = true;
