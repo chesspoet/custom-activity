@@ -97,7 +97,7 @@ define([
 
         payload['arguments'].execute.inArguments = [{
             "tokens": authTokens,
-            "phoneNumber": "52"+"{{Contact.Attribute.DATA_PRUEBA_NUEVOS_USER.Telefono_celular}}",
+            "phoneNumber": "506"+"{{Contact.Attribute.DATA_PRUEBA_NUEVOS_USER.Telefono_celular}}",
             "emailAddress": "{{InteractionDefaults.email}}",
             "clientName": "{{Contact.Attribute.DATA_PRUEBA_NUEVOS_USER.Nombre_completo}}",
             "templateId": templateId
