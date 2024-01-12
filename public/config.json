@@ -32,7 +32,7 @@
           }
          ],
         "outArguments": [],
-        "url": "https://sndwhatsappmsg.grupopurdy.com/journeybuilder/execute",
+        "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/execute",
          "verb": "POST",
           "body": "",
           "header": "",
@@ -44,22 +44,22 @@
   "configurationArguments": {
       "applicationExtensionKey": "4f75ab38-936f-48bf-b311-17d7910b0edf",
     "save": {
-      "url": "https://sndwhatsappmsg.grupopurdy.com/journeybuilder/save",
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/save",
         "verb": "POST",
       "useJwt": true
      },
      "publish": {
-      "url": "https://sndwhatsappmsg.grupopurdy.com/journeybuilder/publish",
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/publish",
          "verb": "POST",
       "useJwt": true
      },
     "stop": {
-      "url": "https://sndwhatsappmsg.grupopurdy.com/journeybuilder/stop",
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/stop",
          "verb": "POST",
       "useJwt": true
     },
     "validate": {
-      "url": "https://sndwhatsappmsg.grupopurdy.com/journeybuilder/validate",
+      "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/validate",
       "verb": "POST",
       "useJwt": true
     }
