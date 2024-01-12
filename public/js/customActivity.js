@@ -95,7 +95,7 @@ define([
 
         var templateId = $('#plantilla_what').val();
         var exDE = $('#extension_datos').val();
-        if(exDE == "OPORTUNIDAD_NUEVOS_LEXUS_B2C"){
+        
             payload['arguments'].execute.inArguments = [{
                 "tokens": authTokens,
                 "phoneNumber": "{{Contact.Attribute.OPORTUNIDAD_NUEVOS_LEXUS_B2C.PersonMobilePhone}}",
@@ -103,18 +103,8 @@ define([
                 "clientName": "{{Contact.Attribute.OPORTUNIDAD_NUEVOS_LEXUS_B2C.Nombre}}",
                 "templateId": templateId
             }];
-        }else{
-            if(exDE == "LEADS_NUEVOS_B2C"){
-                payload['arguments'].execute.inArguments = [{
-                    "tokens": authTokens,
-                    "phoneNumber": "{{Contact.Attribute.LEADS_NUEVOS_B2C.Telefono}}",
-                    "emailAddress": "{{InteractionDefaults.email}}",
-                    "clientName": "{{Contact.Attribute.LEADS_NUEVOS_B2C.Primer_Nombre}}",
-                    "templateId": templateId
-                }];
-            }
+        
 
-        }
         
         payload['metaData'].isConfigured = true;
 
