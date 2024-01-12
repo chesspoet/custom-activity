@@ -1,0 +1,30 @@
+name: Azure Static Web Apps CI/CD
+
+pr:
+  branches:
+    include:
+      - master.deploy
+trigger:
+  branches:
+    include:
+      - master.deploy
+
+jobs:
+- job: build_and_deploy_job
+  displayName: Build and Deploy Job
+  condition: or(eq(variables['Build.Reason'], 'Manual'),or(eq(variables['Build.Reason'], 'PullRequest'),eq(variables['Build.Reason'], 'IndividualCI')))
+  pool:
+    vmImage: ubuntu-latest
+  variables:
+  - group: Azure-Static-Web-Apps-brave-field-09fae9c0f-variable-group
+  steps:
+  - checkout: self
+    submodules: true
+  - task: AzureStaticWebApp@0
+    inputs:
+      app_location: '/public'
+      output_location: '/public'
+      skip_app_build: true
+      azure_static_web_apps_api_token: '$(AZURE_STATIC_WEB_APPS_API_TOKEN_BRAVE_FIELD_09FAE9C0F)'
+###### End of Repository/Build Configurations ######
+

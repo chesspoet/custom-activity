@@ -1,114 +1,114 @@
 {
-    "key": "4f75ab38-936f-48bf-b311-17d7910b0edf",
-    "workflowApiVersion": "1.1",
-    "metaData": {
-        "icon": "images/icon.png",
-        "iconSmall": "images/iconSmall.png",
-        "category": "message"
-    },
-    "type": "REST",
-    "lang": {
-        "en-US": {
-            "name": "Atom Whats",
-          "description": "A Template para enviar whats",
-          "step1Label": "Configure Activity"
-        }
-    },
-    "arguments": {
-        "execute": {
-           "inArguments":[
-            {
-              "emailAddress": "{{InteractionDefaults.Email}}"
-            },
-            {
-              "phoneNumber": "{{Contact.Attribute.DATA_PRUEBA_NUEVOS_USER.Telefono_celular}}"
-            }
-            ,
-            {
-              "clientName": "{{Contact.Attribute.DATA_PRUEBA_NUEVOS_USER.Nombre_completo}}" 
-            },
-            {
-              "templateId": "X1Mva7L7EVd06JeaeF8A"
-            }
-           ],
-          "outArguments": [],
-          "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/execute",
-           "verb": "POST",
-            "body": "",
-            "header": "",
-            "format": "json",
-            "useJwt": true,
-            "timeout": 10000
-        }
-    },
-    "configurationArguments": {
-        "applicationExtensionKey": "4f75ab38-936f-48bf-b311-17d7910b0edf",
-      "save": {
-        "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/save",
-          "verb": "POST",
-        "useJwt": true
-       },
-       "publish": {
-        "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/publish",
-           "verb": "POST",
-        "useJwt": true
-       },
-      "stop": {
-        "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/stop",
-           "verb": "POST",
-        "useJwt": true
-      },
-      "validate": {
-        "url": "https://apitestatom-0c75084e7641.herokuapp.com/journeybuilder/validate",
-        "verb": "POST",
-        "useJwt": true
+  "key": "4f75ab38-936f-48bf-b311-17d7910b0edf",
+  "workflowApiVersion": "1.1",
+  "metaData": {
+      "icon": "images/icon.png",
+      "iconSmall": "images/iconSmall.png",
+      "category": "message"
+  },
+  "type": "REST",
+  "lang": {
+      "en-US": {
+          "name": "Atom Whats",
+        "description": "A Template para enviar whats",
+        "step1Label": "Configure Activity"
       }
+  },
+  "arguments": {
+      "execute": {
+         "inArguments":[
+          {
+            "emailAddress": "{{InteractionDefaults.Email}}"
+          },
+          {
+            "phoneNumber": "{{Contact.Attribute.OPORTUNIDAD_NUEVOS_LEXUS_B2C.PersonMobilePhone}}"
+          }
+          ,
+          {
+            "clientName": "{{Contact.Attribute.OPORTUNIDAD_NUEVOS_LEXUS_B2C.Nombre}}" 
+          },
+          {
+            "templateId": "X1Mva7L7EVd06JeaeF8A"
+          }
+         ],
+        "outArguments": [],
+        "url": "https://sndwhatsappmsg.grupopurdy.com/journeybuilder/execute",
+         "verb": "POST",
+          "body": "",
+          "header": "",
+          "format": "json",
+          "useJwt": true,
+          "timeout": 10000
+      }
+  },
+  "configurationArguments": {
+      "applicationExtensionKey": "4f75ab38-936f-48bf-b311-17d7910b0edf",
+    "save": {
+      "url": "https://sndwhatsappmsg.grupopurdy.com/journeybuilder/save",
+        "verb": "POST",
+      "useJwt": true
+     },
+     "publish": {
+      "url": "https://sndwhatsappmsg.grupopurdy.com/journeybuilder/publish",
+         "verb": "POST",
+      "useJwt": true
+     },
+    "stop": {
+      "url": "https://sndwhatsappmsg.grupopurdy.com/journeybuilder/stop",
+         "verb": "POST",
+      "useJwt": true
     },
-    "wizardSteps": [
-        { "label": "Configure Activity", "key": "step1" }
-    ],
-    "userInterfaces": {
-        "configModal": {
-            "height": 400,
-            "width": 1000,
-          "fullscreen": false
-        }
-    },
-    "schema": {
-        "arguments": {
-            "execute": {
-                "inArguments": [
-                  {
-                    "phoneNumber": {
-                      "dataType": "Phone",
-                      "isNullable": false,
-                      "direction": "in"
-                    }
-                  },
-                  {
-                    "emailAddress": {
-                      "dataType": "Email",
-                      "isNullable": false,
-                      "direction": "in"
-                    }
-                  },
-                  {
-                    "clientName": {
-                      "dataType": "Text",
-                      "isNullable": false,
-                      "direction": "in"
-                    }
-                  },
-                  {
-                    "templateId": {
-                      "dataType": "Text",
-                      "isNullable": false,
-                      "direction": "in"
-                    }
-                  }
-                ],
-                "outArguments": []
-            }
-        }
+    "validate": {
+      "url": "https://sndwhatsappmsg.grupopurdy.com/journeybuilder/validate",
+      "verb": "POST",
+      "useJwt": true
     }
+  },
+  "wizardSteps": [
+      { "label": "Configure Activity", "key": "step1" }
+  ],
+  "userInterfaces": {
+      "configModal": {
+          "height": 400,
+          "width": 1000,
+        "fullscreen": false
+      }
+  },
+  "schema": {
+      "arguments": {
+          "execute": {
+              "inArguments": [
+                {
+                  "phoneNumber": {
+                    "dataType": "Phone",
+                    "isNullable": false,
+                    "direction": "in"
+                  }
+                },
+                {
+                  "emailAddress": {
+                    "dataType": "Email",
+                    "isNullable": false,
+                    "direction": "in"
+                  }
+                },
+                {
+                  "clientName": {
+                    "dataType": "Text",
+                    "isNullable": false,
+                    "direction": "in"
+                  }
+                },
+                {
+                  "templateId": {
+                    "dataType": "Text",
+                    "isNullable": false,
+                    "direction": "in"
+                  }
+                }
+              ],
+              "outArguments": []
+          }
+      }
+  }
 }
